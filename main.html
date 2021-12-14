@@ -4,26 +4,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo List</title>
+    <title>To do list</title>
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 
-    <div class="header">
-        <h1>Tarefas do dia:</h1>
-        <input type="text" placeholder="Adicionar a lista...">
-        <button class="addbtn">Adicionar</button>
+    <div id="myDIV" class="header">
+        <h2><span class="txtCorV">Tarefas</span> do <span class="txtCorL">dia</span></h2>
+        <input type="text" id="myInput"  placeholder="Adicionar a lista...">
+        <span onclick="newElement()" class="addBtn">Add</span>
     </div>
-    <div>
-        <ul>
-            <li>Estudar</li>
-            <li>Fazer exercícios</li>
-            <li>Ler um livro</li>            
-
-        </ul>
-
-    </div>
-
+    
+    <ul id="myUL">
+        <li>Estudar</li>
+        <li>Fazer exercícios</li>
+        <li>Ler um livro</li>            
+    </ul>
+        
+            
+    
+    
     <script src="./script.js"></script>
+
 </body>
 </html>

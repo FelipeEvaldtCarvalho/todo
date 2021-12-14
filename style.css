@@ -1,3 +1,5 @@
+
+
 *{
     margin: 0;
     padding: 0;
@@ -5,7 +7,7 @@
 }
 
 body{
-    background: rgb(73, 21, 0);
+    background: black;
     padding: 50px;
 }
 
@@ -13,11 +15,28 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 70%;
+    width: 80%;
     margin: auto;
-    background: white;
+    background: rgb(31, 31, 31);
     border-top-right-radius:15px ;
     border-top-left-radius:15px ;  
+    color:#fff;
+    transition: .6s;
+}
+
+.header h2, input, span{
+    margin-top: 25px;
+    
+}
+
+.header h2{
+    font-size:45px;
+    
+}
+
+
+.header span{
+    margin-bottom: 25px;
 }
 
 .header:after{    
@@ -28,17 +47,16 @@ body{
 }
 
 input{
-    border:rgb(12, 12, 94) 1px solid;
     border-radius: 5px;
     width: 70%;
     padding: 10px;
 
 }
 
-.addbtn{
+.addBtn{
     padding: 10px;
     width: 30%;
-    background: cornflowerblue;
+    background: black;
     border-radius: 5px;
     border:none;
     cursor: pointer;
@@ -46,22 +64,29 @@ input{
     text-align: center;
     color: white;
     font-size: 16px;
+
 }
 
-.addbtn:hover{
-    background: rgb(27, 92, 214);
+.addBtn:hover{
+    background: white;
+    color:black;
 }
+
+
 
 ul{
     margin: 0;
     padding: 0;
-    width: 70%;
-    margin: auto;
+    width: 80%;
+    margin: auto; 
     
 }
 
 ul li {
+    display: flex;
+    flex-direction: row;
     cursor: pointer;
+    align-items: center;
     position: relative;
     padding: 12px 8px 12px 40px;
     list-style-type: none;
@@ -72,6 +97,7 @@ ul li {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    
 }
 
 ul li.checked{
@@ -80,6 +106,14 @@ ul li.checked{
     text-decoration: line-through;
 
 }
+
+.txtCorV{
+    color:rgb(182, 131, 182);
+}
+.txtCorL{
+    color:rgb(243, 164, 73);
+}
+
 
 ul li:nth-child(even) {
     background: rgb(185, 185, 185);
@@ -110,12 +144,15 @@ ul li.checked::before {
 
   .close {
     position: absolute;
-    right: 0;
-    top: 0;
-    padding: 12px 16px 12px 16px;
+    top: -21px;
+    right: 15px;
+    padding: 8px 13px;
   }
 
   .close:hover {
     background-color: #f44336;
+    border-radius: 50%;
     color: white;
   }
+
+  
