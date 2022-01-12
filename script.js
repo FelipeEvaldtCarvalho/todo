@@ -108,12 +108,62 @@ listaTarefas.addEventListener('click', function(ev) {
 function deleteTarefa(e) {
   if(e.target.classList.contains('close')) {
     if(confirm('Deseja apagar a tarefa?')) {
+      var valorTarefa;
+      valorTarefa = e.target.parentElement.firstChild.textContent;
       e.target.parentElement.remove();
 
-      deleteTarefaLS(e.target.parentElement.textContent);
+      deleteLs(valorTarefa)
     }
   }
 }
+// deletar do LS
+function deleteLs(valorTarefa){
+  var tarefasA;
+  tarefasA = localStorage.getItem('tarefas');
+  tarefasA = JSON.parse(tarefasA);
+  tarefasA.forEach(function(tarefa, index){
+
+    if(valorTarefa === tarefa){ 
+      
+      tarefasA.splice(index, 1);
+      localStorage.setItem('tarefas', JSON.stringify(tarefasA));
+    } 
+  });
+}
+      
+      
+
+
+      
+      
+      
+      
+      
+      
+   
+
+
+  
+
+  
+  
+
+
+       
+      
+
+        
+
+        
+          
+
+      
+      
+
+  
+
+      
+
 
 // Resetar a lista
 function resetLista(){
