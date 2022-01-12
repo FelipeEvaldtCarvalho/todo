@@ -1,63 +1,138 @@
-var myNodelist = document.getElementsByTagName("LI");
-var i;
-for (i = 0; i < myNodelist.length; i++) {
-  var span = document.createElement("SPAN");
-  var txt = document.createTextNode("\u00D7");
-  span.className = "close";
-  span.appendChild(txt);
-  myNodelist[i].appendChild(span);
-}
+//VARIAVEIS
+const listaTarefas = document.querySelector('#myUL');
+const addBtn = document.querySelector('#addBtn');
+const clearBtn = document.querySelector('#clearBtn');
+const tarefaInput = document.querySelector('#myInput');
 
-var myNodelist = document.getElementsByTagName("LI");
-var i;
-for (i = 0; i < myNodelist.length; i++) {
-  var span = document.createElement("SPAN");
-  var txt = document.createTextNode("\u00D7");
-  span.className = "close";
-  span.appendChild(txt);
-  myNodelist[i].appendChild(span);
-}
+//load events
+carregaEventos()
 
-var close = document.getElementsByClassName("close");
-var i;
-for (i = 0; i < close.length; i++){
-  close[i].onclick = function() {
-    var div = this.parentElement;
-    div.style.display = "none";
+//load events
+function carregaEventos(){ 
+  listaTarefas.addEventListener('click', deleteTarefa);
+  //carregar local storage(LS)
+  document.addEventListener('DOMContentLoaded', loadTerefas);
+}
+// get do LS
+function loadTerefas() {
+  let tarefas;
+  if(localStorage.getItem('tarefas') === null){
+    tarefas = [];
+  } else {
+    tarefas = JSON.parse(localStorage.getItem('tarefas'));
   }
+  tarefas.forEach(function(tarefa){
+    // criar uma li 
+    const li = document.createElement('li');
+    // adicionar classe
+    li.className = 'ulItem';
+    // criar text node e append na li
+    li.appendChild(document.createTextNode(tarefa));
+    // Criar span 
+    const span = document.createElement("SPAN");
+    // Add classe no span
+    span.className = 'close';
+    // Add icon no span
+    const txt = document.createTextNode("\u00D7");
+    span.appendChild(txt);  
+    // Append span no li
+    li.appendChild(span);
+    // Append li no ul
+    listaTarefas.appendChild(li);
+  });
 }
 
-var list = document.querySelector('ul');
-list.addEventListener('click', function(ev) {
+
+
+    
+
+
+
+
+//função add
+function newElement() {
+  if (tarefaInput.value === '') {
+    alert('Complete o campo para adicionar uma nova tarefa ;)');
+  } else {
+  // criar uma li 
+  const li = document.createElement('li');
+  // adicionar classe
+  li.className = 'ulItem';
+  // criar text node e append na li
+  li.appendChild(document.createTextNode(tarefaInput.value));
+  // Criar span 
+  const span = document.createElement("SPAN");
+  // Add classe no span
+  span.className = 'close';
+  // Add icon no span
+  const txt = document.createTextNode("\u00D7");
+  span.appendChild(txt);  
+  // Append span no li
+  li.appendChild(span);
+  // Append li no ul
+  listaTarefas.appendChild(li);
+  // salvar no LS
+  saveTarefa(tarefaInput.value);
+  // Limpar o input
+  tarefaInput.value = '';
+}
+}
+// function save LS
+function saveTarefa(tarefa){
+  let tarefas;
+  if(localStorage.getItem('tarefas') === null){
+    tarefas = [];
+  } else {
+    tarefas = JSON.parse(localStorage.getItem('tarefas'));
+  }
+  tarefas.push(tarefa);
+  localStorage.setItem('tarefas', JSON.stringify(tarefas));
+}
+
+// click enter
+const clickEnter = document.querySelector('#myInput').addEventListener('keyup', function(event){
+  if (event.keyCode === 13) {
+    document.getElementById('addBtn').click();
+    event.preventDefault();
+  }
+});
+
+// Checked function
+listaTarefas.addEventListener('click', function(ev) {
   if (ev.target.tagName === 'LI'){
     ev.target.classList.toggle('checked');
   }
 }, false);
 
-function newElement(){
-  var li = document.createElement("li");
-  var inputValue = document.getElementById("myInput").value;
-  var t = document.createTextNode(inputValue);
-  li.appendChild(t);
-  if (inputValue === '') {
-    alert ("Complete o campo para adicionar uma nova tarefa ;)");
-  } else {
-    document.getElementById("myUL").appendChild(li);
-  }
-  document.getElementById("myInput").value = "";
+// Deleta tarefa
+function deleteTarefa(e) {
+  if(e.target.classList.contains('close')) {
+    if(confirm('Deseja apagar a tarefa?')) {
+      e.target.parentElement.remove();
 
-  var span = document.createElement("SPAN");
-  var txt = document.createTextNode("\u00D7");
-  span.className = "close";
-  span.appendChild(txt);
-  li.appendChild(span);
-
-  for  (i = 0; i < close.length; i++){
-    close[i].onclick = function(){
-      var div = this.parentElement;
-      div.style.display = "none";
+      deleteTarefaLS(e.target.parentElement.textContent);
     }
   }
-
-
 }
+
+// Resetar a lista
+function resetLista(){
+  if (confirm('Deseja limpar a lista?')) {
+    while(listaTarefas.firstChild) {
+      listaTarefas.removeChild(listaTarefas.firstChild);
+    }
+  } 
+  resetListaLS();
+}
+// Resetar LS
+function resetListaLS() {
+  localStorage.clear();
+}
+
+
+
+
+
+
+  
+
